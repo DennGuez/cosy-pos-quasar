@@ -1,0 +1,31 @@
+// app global css in SCSS form
+.active-menu {
+    background-color: $primary;
+    padding: 10px;
+    border-radius: 4px;
+    i {
+        color: white;
+    }
+    div {
+        color: white;
+    }
+}
+.item-class {
+    padding: 10px;
+}
+
+.bg-redx {
+    background: #F1C8D0;
+}
+.bg-purplex {
+    background: #E4CDED;
+}
+.bg-bluex {
+    background: #C2DBE9;
+}
+.bg-violetx {
+    background: #C9CAEF;
+}
+.bg-greenx {
+    background: #CFDDDB;
+}

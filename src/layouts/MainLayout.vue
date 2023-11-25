@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue'
+import OrderCard from 'src/components/products/OrderCard.vue'
 
 const essentialLinks: EssentialLinkProps[] = [
   {
@@ -74,7 +75,7 @@ const currentRouteName = computed(() => {
 
     <q-drawer class="bg-dark" show-if-above v-model="rightDrawerOpen" side="right">
       <q-layout>
-        <q-header class="bg-dark text-white">
+        <q-header class="header-order_menu bg-dark text-white relative-position">
           <q-toolbar>
             <q-toolbar-title>
               <strong>Orden</strong> Menu
@@ -82,24 +83,17 @@ const currentRouteName = computed(() => {
           </q-toolbar>
         </q-header>
         <q-page-container>
-          <q-card class="bg-primary text-white">
-            <q-item>
-              <q-item-section class="col-1">
-                <q-item-label class="text-black text-subtitle2 text-center bg-white style-counter">
-                  1
-                </q-item-label>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-weight-medium" >Ramen cochabambino</q-item-label>
-                <q-item-label class="text-white" caption>Bs7.50</q-item-label>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-center">x2</q-item-label>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label class="text-right">Bs15.00</q-item-label>
-              </q-item-section>
-            </q-item>
+          <OrderCard v-for="(_, index) in 15" :index="index"/>
+          <q-card class="">
+            <q-card-section>
+              subtotal           
+            </q-card-section>
+            <q-card-section>
+              Total
+            </q-card-section>
+            <q-card-section>
+              Place Order
+            </q-card-section>
           </q-card>
         </q-page-container>
       </q-layout>
@@ -112,8 +106,8 @@ const currentRouteName = computed(() => {
   </q-layout>
 </template>
 <style scoped>
-.style-counter {
-  padding: 2px;
-  border-radius: 15px;
+.header-order_menu {
+  position: fixed!important;
+  top: 0!important;
 }
 </style>

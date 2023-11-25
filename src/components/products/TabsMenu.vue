@@ -1,6 +1,6 @@
 <template>
     <q-tabs
-        class="bg-dark text-white"
+        class="text-white"
         active-class="active-tabs"
         inline-label
         v-model="UIStore.tabMenu"

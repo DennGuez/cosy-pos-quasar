@@ -25,7 +25,7 @@ const UIStore = useUIStore()
         >
           <q-tab-panel class="q-pa-sm" name="all">
             <div class="row justify-around">
-              <CardProduct v-for="item in 40" />
+              <CardProduct v-for="item in 20" />
             </div>
           </q-tab-panel>
         </q-tab-panels>

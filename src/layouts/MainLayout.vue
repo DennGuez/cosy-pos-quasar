@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { useElementSize } from '@vueuse/core'
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue'
 import OrderCard from 'src/components/products/OrderCard.vue'
 
@@ -19,9 +20,13 @@ const essentialLinks: EssentialLinkProps[] = [
   }
 ];
 
-const route = useRoute()
+
+const el = ref(null)
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
+
+const { height } = useElementSize(el)
+const route = useRoute()
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
@@ -42,9 +47,10 @@ const currentRouteName = computed(() => {
 </script>
 
 <template>
-  <q-layout view="lHr lpR fFf">
+  <q-layout view="lHr lpR fFf" class="bg-dark">
 
     <q-header class="bg-dark text-white">
+      Height: {{ height }}
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
@@ -73,30 +79,46 @@ const currentRouteName = computed(() => {
       </q-list>
     </q-drawer>
 
-    <q-drawer class="bg-dark" show-if-above v-model="rightDrawerOpen" side="right">
-      <q-layout>
-        <q-header class="header-order_menu bg-dark text-white relative-position">
+    <q-drawer class="bg-dark q-pr-md" show-if-above v-model="rightDrawerOpen" side="right">
+      <!-- <q-layout view="lHh lpr lFf" container>
+        <q-header class="bg-dark">
           <q-toolbar>
-            <q-toolbar-title>
+            <q-toolbar-title class="">
               <strong>Orden</strong> Menu
             </q-toolbar-title>
           </q-toolbar>
         </q-header>
-        <q-page-container>
-          <OrderCard v-for="(_, index) in 15" :index="index"/>
-          <q-card class="">
-            <q-card-section>
-              subtotal           
-            </q-card-section>
-            <q-card-section>
-              Total
-            </q-card-section>
-            <q-card-section>
-              Place Order
-            </q-card-section>
-          </q-card>
+
+        <q-footer class="bg-red">
+          <q-tabs no-caps active-color="primary" indicator-color="transparent" class="text-grey-8" style="height: 100%;">
+            <q-tab label="Images" />
+            <q-tab label="Videos" />
+            <q-tab label="Articles" />
+          </q-tabs>
+          <q-tabs no-caps active-color="primary" indicator-color="transparent" class="text-grey-8" style="height: 100%;">
+            <q-tab label="Images" />
+            <q-tab label="Videos" />
+            <q-tab label="Articles" />
+          </q-tabs>
+        </q-footer>
+
+        <q-page-container >
+          <q-page ref="el" class="text-white">
+            <OrderCard v-for="(_, index) in 1" :index="index"/>
+          </q-page>
         </q-page-container>
-      </q-layout>
+    </q-layout> -->
+    <div style="width: 100%; background: red; height: 50px;">
+        Header
+    </div>
+    <div class="column" style="height: calc(100vh - 50px);">
+      <div class="col-auto overflow-auto" style="max-height: calc(100vh - 250px);">
+        <OrderCard v-for="(_, index) in 9" :index="index"/>
+      </div>
+      <div class="col order-last" style="background: purple;">
+        footer
+      </div>
+    </div>
     </q-drawer>
 
     <q-page-container>
@@ -105,9 +127,14 @@ const currentRouteName = computed(() => {
 
   </q-layout>
 </template>
-<style scoped>
-.header-order_menu {
+<style lang="scss" scoped>
+// $box_height: 100vh;
+// .header-order_menu {
+//   position: fixed!important;
+//   top: 0!important;
+// }
+/* .footer-order_menu {
   position: fixed!important;
-  top: 0!important;
-}
+  bottom: 0!important;
+} */
 </style>

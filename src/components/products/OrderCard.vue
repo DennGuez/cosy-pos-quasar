@@ -1,5 +1,5 @@
 <template>
-  <q-item class="bg-primary text-white q-mb-sm">
+  <q-item class="card-order bg-primary text-white q-mb-sm">
       <q-item-section class="col-1">
       <q-item-label class="text-dark text-subtitle2 text-center bg-white style-counter">
           {{ index + 1 }}
@@ -25,6 +25,9 @@ defineProps<{
 </script>
 
 <style scoped>
+.card-order {
+  border-radius: 4px;
+}
 .style-counter {
   padding: 2px;
   border-radius: 15px;
